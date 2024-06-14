@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producer-Consumer Problem</title>
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.producer-consumer {
+    display: flex;
+    align-items: center;
+}
+
+.producer, .consumer {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.queue {
+    width: 400px;
+    height: 100px;
+    border: 2px dashed #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.queue-items {
+    display: flex;
+    overflow: hidden;
+}
+
+.queue-item {
+    width: 50px;
+    height: 50px;
+    background-color: #4CAF50;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Producer-Consumer Problem</h1>
+    <div class="container">
+        <div class="producer-consumer">
+            <div id="producer1" class="producer">Producer 1</div>
+            <div id="queue" class="queue">
+                <div id="queue-items" class="queue-items"></div>
+            </div>
+            <div id="consumer1" class="consumer">Consumer 1</div>
+        </div>
+    </div>
+    <button id="start" onclick="startSimulation()">Start Simulation</button>
+    <script>
+        const queue = [];
+const queueContainer = document.getElementById('queue-items');
+
+function addItemToQueue(item) {
+    queue.push(item);
+    renderQueue();
+}
+
+function removeItemFromQueue() {
+    queue.shift();
+    renderQueue();
+}
+
+function renderQueue() {
+    queueContainer.innerHTML = '';
+    queue.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'queue-item';
+        div.textContent = item;
+        queueContainer.appendChild(div);
+    });
+}
+
+function startSimulation() {
+    setInterval(() => {
+        const item = Math.floor(Math.random() * 100);
+        addItemToQueue(item);
+    }, 1000);
+
+    setInterval(() => {
+        if (queue.length > 0) {
+            removeItemFromQueue();
+        }
+    }, 1500);
+}
+
+    </script>
+</body>
+</html>
