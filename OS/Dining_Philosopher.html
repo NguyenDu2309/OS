@@ -175,22 +175,22 @@
             var run = function() {
                 sequential([
                     500, // pause
-                    function() { log('Philosopher ' + me + ' is thinking'); updatePhilosopherState(me, 'thinking'); },
+                    function() { updatePhilosopherState(me, 'thinking'); },
                     500,
-                    function() { log('Philosopher ' + me + ' sits'); updatePhilosopherState(me, 'sitting'); },
+                    function() { updatePhilosopherState(me, 'sitting'); },
                     left, // channel
-                    function() { log('Philosopher ' + me + ' picked left fork'); moveFork(me, 'left', true); },
+                    function() { moveFork(me, 'left', true); },
                     right,
-                    function() { log('Philosopher ' + me + ' picked right fork'); moveFork(me, 'right', true); },
+                    function() { moveFork(me, 'right', true); },
                     500,
-                    function() { log('Philosopher ' + me + ' eats'); updatePhilosopherState(me, 'eating'); },
+                    function() { updatePhilosopherState(me, 'eating'); },
                     1000,
                     left,
-                    function() { log('Philosopher ' + me + ' dropped left fork'); moveFork(me, 'left', false); },
+                    function() { moveFork(me, 'left', false); },
                     right,
-                    function() { log('Philosopher ' + me + ' dropped right fork'); moveFork(me, 'right', false); },
+                    function() { moveFork(me, 'right', false); },
                     500,
-                    function() { log('Philosopher ' + me + ' is thinking again'); updatePhilosopherState(me, 'thinking'); },
+                    function() { updatePhilosopherState(me, 'thinking'); },
                     1000,
                     function() { setTimeout(run, 0); }
                 ]);
@@ -304,10 +304,10 @@ function updatePhilosopherState(philosopherId, state) {
     var labelElem = document.getElementById('label' + philosopherId);
     var mealElem = document.getElementById('meal' + philosopherId);
 
-    // Remove all states
+    // xóa trạng thái
     philosopherElem.classList.remove('philosopher-thinking', 'philosopher-sitting', 'philosopher-eating');
     
-    // Add new state
+    // thêm mới
     switch (state) {
         case 'thinking':
             philosopherElem.classList.add('philosopher-thinking');
